@@ -163,7 +163,11 @@ scrape_configs:
 
 ```
 
-
+### Start Loki
+Start Loki using the following command:
+```bash
+./loki-linux-amd64 -config.file=loki-config.yaml
+```
 
 
 
