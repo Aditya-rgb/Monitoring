@@ -57,7 +57,7 @@ cd application
  ![Alt Text](images/MongoDB-Snippet.JPG)
 
 
-## Establishing the Connection Between the Frontend and Backend Code Bases
+### 2. Establishing the Connection Between the Frontend and Backend Code Bases
 
 1. Opened a new terminal on the same EC2 instance:
     ```bash
@@ -88,3 +88,25 @@ cd application
     ```plaintext
     http://34.223.88.56:3000/";
     ```
+
+### 3. Install and Configure Grafana
+
+## Start Grafana
+Start and enable the Grafana service using the following commands:
+
+```bash
+sudo systemctl start grafana-server
+sudo systemctl enable grafana-server
+```
+## Access Grafana
+Grafana is accessible at:  
+```bash
+http://<server-ip>:3000
+```
+
+**Default credentials:**  
+- **Username:** admin  
+- **Password:** admin
+
+
+
