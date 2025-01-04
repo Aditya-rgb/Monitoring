@@ -24,10 +24,11 @@ Before proceeding, ensure the following prerequisites are met:
 ```bash
 git clone https://github.com/your-repository/application.git
 cd application
+```
 
 ## Connecting the Backend Code to MongoDB and Hosting the Application
 
-### Steps to Connect the Backend to MongoDB
+## Steps to Connect the Backend to MongoDB
 
 1. **Navigate to the Backend Directory**:
    After cloning the Travel Memory application repository on your EC2 instance, navigate to the backend directory:
