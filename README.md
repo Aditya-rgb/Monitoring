@@ -138,6 +138,32 @@ unzip loki-linux-amd64.zip
 chmod +x loki-linux-amd64
 ```
 
+### Create Loki Configuration
+Create a loki-config.yaml file with the following content:
+```yaml
+auth_enabled: false
+
+server:
+  http_listen_port: 3100
+
+storage_config:
+  boltdb_shipper:
+    active_index_directory: /tmp/loki/index
+    cache_location: /tmp/loki/cache
+  filesystem:
+    directory: /tmp/loki/chunks
+
+scrape_configs:
+  - job_name: 'mern-logs'
+    static_configs:
+      - targets: ['localhost']
+        labels:
+          job: 'mern-logs'
+          __path__: /path/to/mern/logs/*.log
+
+```
+
+
 
 
 
