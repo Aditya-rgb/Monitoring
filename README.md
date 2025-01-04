@@ -91,14 +91,14 @@ cd application
 
 ### 3. Install and Configure Grafana
 
-## Start Grafana
+#### Start Grafana
 Start and enable the Grafana service using the following commands:
 
 ```bash
 sudo systemctl start grafana-server
 sudo systemctl enable grafana-server
 ```
-## Access Grafana
+#### Access Grafana
 Grafana is accessible at:  
 ```bash
 http://<server-ip>:3000
