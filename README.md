@@ -169,5 +169,117 @@ Start Loki using the following command:
 ./loki-linux-amd64 -config.file=loki-config.yaml
 ```
 
+## 5. Install Prometheus on Your EC2
+
+### Download Prometheus
+1. Go to the [Prometheus Downloads](https://prometheus.io/download/) page.
+2. Copy the URL for the latest Prometheus version.
+3. Download it on your Linux system:
+   ```bash
+   wget https://github.com/prometheus/prometheus/releases/download/v2.47.0/prometheus-2.47.0.linux-amd64.tar.gz
+   ```
+4. Extract and Move the Files:
+   ```bash
+   tar -xvzf prometheus-2.47.0.linux-amd64.tar.gz
+   mv prometheus-2.47.0.linux-amd64 prometheus
+   cd prometheus
+   ```
+5. Run Prometheus
+   ```bash
+   ./prometheus --config.file=prometheus.yml
+   ```
+6. Set Up Node.js Backend for Prometheus Metrics:
+   Navigate to Your Backend Folder
+   Go to the directory where your Node.js backend application is located:
+   ```bash
+   cd ~/travel-memory-app/backend
+   ```
+
+7. Install Prometheus Client Library
+   Run the following command to install the prom-client package:
+   ```bash
+   npm install prom-client
+   ```
+
+8. Modify the Backend Code to Expose Metrics
+   Add the following code to your backend entry file (e.g., app.js or index.js):
+   ```bash
+   const express = require('express');
+   const cors = require('cors');
+   const promClient = require('prom-client');
+   require('dotenv').config();
+
+   const app = express();
+   PORT = process.env.PORT;
+   const conn = require('./conn');
+   app.use(express.json());
+   app.use(cors());
+
+   // Prometheus metrics setup
+   const collectDefaultMetrics = promClient.collectDefaultMetrics;
+   collectDefaultMetrics(); // Collects default Node.js metrics
+
+   // Create custom Prometheus metrics
+   const httpRequestCounter = new promClient.Counter({
+       name: 'http_requests_total',
+       help: 'Total number of HTTP requests',
+       labelNames: ['method', 'route', 'status']
+   });
+
+   const httpResponseTimeHistogram = new promClient.Histogram({
+       name: 'http_response_time_seconds',
+       help: 'Histogram of HTTP response times in seconds',
+       labelNames: ['method', 'route', 'status'],
+       buckets: [0.1, 0.5, 1, 1.5, 2, 5] // Define response time buckets
+   });
+
+   // Middleware to record metrics
+   app.use((req, res, next) => {
+       const start = Date.now();
+       res.on('finish', () => {
+           const responseTimeInSeconds = (Date.now() - start) / 1000;
+           httpRequestCounter.inc({
+               method: req.method,
+               route: req.route ? req.route.path : req.path,
+               status: res.statusCode
+           });
+           httpResponseTimeHistogram.observe(
+               {
+                   method: req.method,
+                   route: req.route ? req.route.path : req.path,
+                   status: res.statusCode
+               },
+               responseTimeInSeconds
+           );
+       });
+       next();
+   });
+
+   // Routes
+   const tripRoutes = require('./routes/trip.routes');
+   app.use('/trip', tripRoutes); // http://localhost:3001/trip --> POST/GET/GET by ID
+
+   app.get('/hello', (req, res) => {
+       res.send('Hello World!');
+   });
+
+   // Expose Prometheus metrics endpoint
+   app.get('/metrics', async (req, res) => {
+       res.set('Content-Type', promClient.register.contentType);
+       res.end(await promClient.register.metrics());
+   });
+
+   // Start server
+   app.listen(PORT, () => {
+       console.log(`Server started at http://localhost:${PORT}`);
+   });
+
+   ```
+
+9. Save and Restart Your Backend Application:
+   ```bash
+   npm start
+   ```
+   The /metrics endpoint will now expose Prometheus metrics at http://localhost:3000/metrics.
 
 
