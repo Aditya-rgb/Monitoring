@@ -19,16 +19,16 @@ Before proceeding, ensure the following prerequisites are met:
 
 ## Installation
 
-### 1. Clone the Repository
+## 1. Clone the Repository
 
 ```bash
 git clone https://github.com/your-repository/application.git
 cd application
 ```
 
-## Connecting the Backend Code to MongoDB and Hosting the Application
+### Connecting the Backend Code to MongoDB and Hosting the Application
 
-## Steps to Connect the Backend to MongoDB
+### Steps to Connect the Backend to MongoDB
 
 1. **Navigate to the Backend Directory**:
    After cloning the Travel Memory application repository on your EC2 instance, navigate to the backend directory:
@@ -57,7 +57,7 @@ cd application
  ![Alt Text](images/MongoDB-Snippet.JPG)
 
 
-### 2. Establishing the Connection Between the Frontend and Backend Code Bases
+## 2. Establishing the Connection Between the Frontend and Backend Code Bases
 
 1. Opened a new terminal on the same EC2 instance:
     ```bash
@@ -89,16 +89,16 @@ cd application
     http://34.223.88.56:3000/";
     ```
 
-### 3. Install and Configure Grafana
+## 3. Install and Configure Grafana
 
-#### Start Grafana
+### Start Grafana
 Start and enable the Grafana service using the following commands:
 
 ```bash
 sudo systemctl start grafana-server
 sudo systemctl enable grafana-server
 ```
-#### Access Grafana
+### Access Grafana
 Grafana is accessible at:  
 ```bash
 http://<server-ip>:3000
@@ -108,7 +108,7 @@ http://<server-ip>:3000
 - **Username:** admin  
 - **Password:** admin
 
-#### Change Grafana Port (Optional)
+### Change Grafana Port (Optional)
 To change the port (e.g., to 5000):  
 
 1. Open the `grafana.ini` configuration file:  
@@ -127,6 +127,16 @@ To change the port (e.g., to 5000):
    sudo systemctl restart grafana-server
    ```
 
+## 4. Install and Configure Loki
+
+### Download and Set Up Loki
+Run the following commands to download and set up Loki:
+
+```bash
+wget https://github.com/grafana/loki/releases/download/v2.8.0/loki-linux-amd64.zip
+unzip loki-linux-amd64.zip
+chmod +x loki-linux-amd64
+```
 
 
 
