@@ -108,5 +108,26 @@ http://<server-ip>:3000
 - **Username:** admin  
 - **Password:** admin
 
+#### Change Grafana Port (Optional)
+To change the port (e.g., to 5000):  
+
+1. Open the `grafana.ini` configuration file:  
+   ```bash
+   sudo nano /etc/grafana/grafana.ini
+   ```
+
+2. Update the [server] section:
+   ```bash
+   [server]
+   http_port = 5000
+   ```
+
+3. Restart Grafana:
+   ```bash
+   sudo systemctl restart grafana-server
+   ```
+
+
+
 
 
