@@ -282,4 +282,32 @@ Start Loki using the following command:
    ```
    The /metrics endpoint will now expose Prometheus metrics at http://localhost:3000/metrics.
 
+## 6. Create a Grafana Dashboard
+Add Loki as a Data Source
+ 1. Navigate to Configuration > Data Sources.
+ 2. Click Add Data Source and select Loki.
+ 3. Set the URL to your Loki instance (e.g., http://localhost:3100).
+Build a Logs Dashboard
+ 1. Go to Dashboards > New Dashboard.
+ 2. Add a new Logs Panel.
+ 3. Query logs using labels defined in the Loki configuration (job="mern-logs").
 
+
+## 7. Testing the Setup
+ 1. Start the front-end and back-end applications.
+ 2. Check if logs are being generated in the specified directory.
+ 3. Verify that Loki and Promtail are pushing logs to Grafana.
+ 4. Open the Grafana dashboard to view and analyze the logs.
+
+## 8. Troubleshooting
+ 1. Grafana not starting: Ensure no other service is using the configured port.
+ 2. Logs not appearing in Grafana: Verify Loki and Promtail configurations and log file paths.
+  3. Loki service errors: Double-check the loki-config.yaml file for syntax issues.
+
+## 9. Conclusion
+This guide provides a step-by-step approach to setting up a MERN stack application with integrated log aggregation and visualization using Grafana and Loki. By following these steps, you can efficiently monitor your application's performance and troubleshoot issues in real time.
+
+## 10. License
+```bash
+This project is licensed under the MIT License - see the LICENSE file for details.
+```
