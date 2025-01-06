@@ -38,7 +38,7 @@ cd application
    sudo touch .env # Created an environment file to store sensitive information such as the MongoDB URI and port number:
    nano .env
    #Pasted the below lines inside .env file
-   #MONGO_URI='mongodb+srv://adityavakharia:Alphavak98@cluster0.7powl.mongodb.net/Travel-Memory-DB'
+   #MONGO_URI='mongodb+srv://adityavakharia:*********@cluster0.7powl.mongodb.net/Travel-Memory-DB'
    #PORT=3001
    sudo apt install npm # Installed NPM and Dependencies and installed the necessary Node.js dependencies:
    npm install
@@ -54,7 +54,7 @@ cd application
    ```bash
    http://34.223.88.56:3001/
    ```
- ![Alt Text](images/MongoDB-Snippet.JPG)
+ 
 
 
 ## 2. Establishing the Connection Between the Frontend and Backend Code Bases
