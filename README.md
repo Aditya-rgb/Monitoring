@@ -88,6 +88,7 @@ cd application
     ```plaintext
     http://34.223.88.56:3000/";
     ```
+![Alt Text](/images/prom-tm.JPG)
 
 ## 3. Install and Configure Grafana
 
@@ -127,6 +128,14 @@ To change the port (e.g., to 5000):
    sudo systemctl restart grafana-server
    ```
 
+   ![Alt Text](/images/prom-3-grafana-status.JPG)
+
+
+  ![Alt Text](/images/prom-3-grafana-login-page.JPG)
+
+  ![Alt Text](/images/prom-4-grafana-inside.JPG)
+
+  
 ## 4. Install and Configure Loki
 
 ### Download and Set Up Loki
@@ -168,6 +177,8 @@ Start Loki using the following command:
 ```bash
 ./loki-linux-amd64 -config.file=loki-config.yaml
 ```
+
+ ![Alt Text](/images/prom-loki-installation.JPG)
 
 ## 5. Install Prometheus on Your EC2
 
@@ -282,6 +293,12 @@ Start Loki using the following command:
    ```
    The /metrics endpoint will now expose Prometheus metrics at http://localhost:3000/metrics.
 
+ ![Alt Text](/images/prom-1.JPG)
+
+
+ 
+ ![Alt Text](/images/prom-2-metrics.JPG)
+
 ## 6. Create a Grafana Dashboard
 Add Loki as a Data Source
  1. Navigate to Configuration > Data Sources.
@@ -292,6 +309,9 @@ Build a Logs Dashboard
  2. Add a new Logs Panel.
  3. Query logs using labels defined in the Loki configuration (job="mern-logs").
 
+ ![Alt Text](/images/prom-3-grafana-login-page.JPG)
+
+ ![Alt Text](/images/prom-5-grafana-dashboard.JPG)
 
 ## 7. Testing the Setup
  1. Start the front-end and back-end applications.
